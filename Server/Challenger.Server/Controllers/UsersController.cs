@@ -4,7 +4,7 @@ namespace Challenger.Server.Controllers;
 
 public class UsersController : ControllerBase
 {
-	[HttpGet("/register")]
+	[HttpPost("/register")]
 	public string Register(User userToRegister)
 	{
 		return "Registration";
