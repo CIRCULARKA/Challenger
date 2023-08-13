@@ -6,7 +6,7 @@
 			"type": "coreclr",
 			"request": "launch",
 			"preLaunchTask": "Build Server",
-			"program": "${workspaceFolder}/Server/bin/Debug/net6.0/Server.dll",
+			"program": "${workspaceFolder}/Server/Challenger.Server/bin/Debug/net6.0/Challenger.Server.dll",
 			"args": [],
 			"cwd": "${workspaceFolder}/Server",
 			"stopAtEntry": false,
