@@ -1,5 +1,6 @@
-using System;
 using Microsoft.AspNetCore.Mvc;
+
+using Challenger.Server.Data.Models;
 
 namespace Challenger.Server.Controllers;
 
