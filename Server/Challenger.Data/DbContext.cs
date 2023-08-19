@@ -1,8 +1,8 @@
 using Npgsql;
-
-using System.Collections.Generic;
+using NpgsqlTypes;
 
 using Challenger.Server.Data.Models;
+using System;
 
 namespace Challenger.Server.Data;
 
@@ -19,10 +19,29 @@ public class DbContext
 		_connectionString = connectionString;
 	}
 
-	public IEnumerable<User> GetUsers()
+	public void AddUser(User userToAdd)
 	{
-		var dataSource = NpgsqlDataSource.Create(_connectionString);
+		var sql = @"
+			INSERT INTO users (login, name, age, weight, email, password_hash)
+			VALUES ($1, $2, $3, $4, $5, $6);
+		";
 
-		return null;
+		using (var source = CreateSource())
+		{
+			using (var cmd = source.CreateCommand(sql))
+			{
+				cmd.Parameters.AddWithValue(NpgsqlDbType.Varchar, userToAdd.Login);
+				cmd.Parameters.AddWithValue(NpgsqlDbType.Varchar, userToAdd.Name);
+				cmd.Parameters.AddWithValue(NpgsqlDbType.Smallint, userToAdd.Age);
+				cmd.Parameters.AddWithValue(NpgsqlDbType.Smallint, userToAdd.Weight);
+				cmd.Parameters.AddWithValue(NpgsqlDbType.Varchar, userToAdd.Email);
+				cmd.Parameters.AddWithValue(NpgsqlDbType.Varchar, userToAdd.PasswordHash);
+
+				cmd.ExecuteNonQuery();
+			}
+		}
 	}
+
+	private NpgsqlDataSource CreateSource() =>
+		NpgsqlDataSource.Create(_connectionString);
 }
