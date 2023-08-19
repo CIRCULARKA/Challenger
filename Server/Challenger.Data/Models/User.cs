@@ -2,15 +2,15 @@ namespace Challenger.Server.Data.Models;
 
 public class User
 {
-	public string Login { get; set; }
+	public string Login { get; init; }
 
-	public string Name { get; set; }
+	public string Name { get; init; }
 
-	public short Age { get; set; }
+	public short Age { get; init; }
 
-	public short Weight { get; set; }
+	public short Weight { get; init; }
 
-	public string Email { get; set; }
+	public string Email { get; init; }
 
-	public string PasswordHash { get; set; }
+	public string PasswordHash { get; init; }
 }
