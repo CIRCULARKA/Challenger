@@ -1,8 +1,8 @@
-using System;
-
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
+
+using Challenger.Server.Data;
 
 namespace Challenger.Server;
 
@@ -17,8 +17,11 @@ public class Startup
 
 	public void ConfigureServices(IServiceCollection services)
 	{
+		services.AddTransient<DbContext>((provider) =>
+			new DbContext(Configuration["ConnectionString"])
+		);
+
 		services.AddControllers();
-		Console.WriteLine("Connection string: " + Configuration["ConnectionString"]);
 	}
 
 	public void Configure(IApplicationBuilder app)
