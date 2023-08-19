@@ -19,7 +19,7 @@ public class UsersController : ControllerBase
 	}
 
 	[HttpPost("register")]
-	public string Register(User userToRegister)
+	public string Register([FromForm] User userToRegister)
 	{
 		Console.Write($"\"{nameof(Register)}\" method was called: ");
 		Console.WriteLine("Request method: " + HttpContext.Request.Method);
