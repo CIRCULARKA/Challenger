@@ -14,9 +14,9 @@ public class DbContext
 {
 	private string _connectionString;
 
-	public DbContext(string host, string username, string password, string dbName)
+	public DbContext(string connectionString)
 	{
-		_connectionString = $"Host={host};Username={username};Password={password};Database={dbName}";
+		_connectionString = connectionString;
 	}
 
 	public IEnumerable<User> GetUsers()
