@@ -19,11 +19,11 @@ public class UsersController : ControllerBase
 	}
 
 	[HttpPost("register")]
-	public string Register([FromForm] User userToRegister)
+	public IActionResult Register([FromForm] User userToRegister)
 	{
 		_dbContext.AddUser(userToRegister);
 
-		return "Registered";
+		return Ok();
 	}
 
 	[HttpPost("auth")]
