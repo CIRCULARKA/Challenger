@@ -43,4 +43,12 @@ public class UsersController : ControllerBase
 
 		return "Logout";
 	}
+
+	[HttpGet("user")]
+	public IActionResult GetUser([FromQuery] string login)
+	{
+		var targetUser = _dbContext.GetUser(login);
+
+		return Ok(targetUser);
+	}
 }
