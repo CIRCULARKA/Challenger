@@ -1,8 +1,13 @@
 using Npgsql;
 using NpgsqlTypes;
 
-using Challenger.Server.Data.Models;
 using System;
+using System.Threading.Tasks;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+
+using Challenger.Server.Data.Models;
+using System.Threading;
 
 namespace Challenger.Server.Data;
 
@@ -17,6 +22,36 @@ public class DbContext
 	public DbContext(string connectionString)
 	{
 		_connectionString = connectionString;
+	}
+
+	public User GetUser(string login)
+	{
+		var sql = @"SELECT login, name, age, weight, email, password_hash FROM users WHERE login = $1;";
+
+		using (var source = CreateSource())
+		{
+			using (var cmd = source.CreateCommand(sql))
+			{
+				cmd.Parameters.AddWithValue(NpgsqlDbType.Varchar, login);
+
+				using (var reader = cmd.ExecuteReader())
+				{
+					if (!reader.HasRows) throw new ArgumentException($"There is no user with login \"{login}\"");
+					reader.Read();
+
+					var resultedUser = new User()
+					{
+						Login = reader.GetString(0),
+						Name = reader.GetString(1),
+						Age = reader.GetInt16(2),
+						Weight = reader.GetInt16(3),
+						Email = reader.GetString(4),
+						PasswordHash = reader.GetString(5)
+					};
+					return resultedUser;
+				}
+			}
+		}
 	}
 
 	public void AddUser(User userToAdd)
