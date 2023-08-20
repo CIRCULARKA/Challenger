@@ -18,7 +18,7 @@ public class Startup
 	public void ConfigureServices(IServiceCollection services)
 	{
 		services.AddTransient<DbContext>((provider) =>
-			new DbContext(Configuration["ConnectionString"])
+			new DbContext(Configuration.GetConnectionString("Local"))
 		);
 
 		services.AddControllers();
