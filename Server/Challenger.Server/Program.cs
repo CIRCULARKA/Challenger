@@ -1,19 +1,17 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+namespace Challenger.Server;
 
-var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
+public class Program
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+	public static void Main(string[] args)
+	{
+		var app = CreateHostBuilder(args);
+		app.Build().Run();
+	}
+
+	public static IHostBuilder CreateHostBuilder(string[] args) =>
+		Host.CreateDefaultBuilder(args).
+			ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
 }
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();

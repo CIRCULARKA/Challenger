@@ -8,7 +8,7 @@
 			"preLaunchTask": "Build Server",
 			"program": "${workspaceFolder}/Server/Challenger.Server/bin/Debug/net6.0/Challenger.Server.dll",
 			"args": [],
-			"cwd": "${workspaceFolder}/Server",
+			"cwd": "${workspaceFolder}/Server/Challenger.Server",
 			"stopAtEntry": false,
 			"serverReadyAction": {
 				"action": "openExternally",

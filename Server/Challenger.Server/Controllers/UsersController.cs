@@ -1,24 +1,46 @@
+using System;
+
 using Microsoft.AspNetCore.Mvc;
+
+using Challenger.Server.Data.Models;
+using Challenger.Server.Data;
 
 namespace Challenger.Server.Controllers;
 
+[Route("api")]
+[ApiController]
 public class UsersController : ControllerBase
 {
-	[HttpPost("/register")]
-	public string Register(User userToRegister)
+	private DbContext _dbContext;
+
+	public UsersController(DbContext dbContext)
 	{
-		return "Registration";
+		_dbContext = dbContext;
 	}
 
-	[HttpPost("/auth")]
+	[HttpPost("register")]
+	public IActionResult Register([FromForm] User userToRegister)
+	{
+		_dbContext.AddUser(userToRegister);
+
+		return Ok();
+	}
+
+	[HttpPost("auth")]
 	public string Authorize(string userLogin, string passwordHash)
 	{
+		Console.Write($"\"{nameof(Authorize)}\" method was called: ");
+		Console.WriteLine("Request method: " + HttpContext.Request.Method);
+
 		return "Authorization";
 	}
 
-	[HttpPost("/logout")]
+	[HttpPost("logout")]
 	public string Logout(string userLogin)
 	{
+		Console.Write($"\"{nameof(Logout)}\" method was called: ");
+		Console.WriteLine("Request method: " + HttpContext.Request.Method);
+
 		return "Logout";
 	}
 }
