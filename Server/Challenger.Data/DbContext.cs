@@ -2,14 +2,10 @@ using Npgsql;
 using NpgsqlTypes;
 
 using System;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
 
-using Challenger.Server.Data.Models;
-using System.Threading;
+using Challenger.Data.Models;
 
-namespace Challenger.Server.Data;
+namespace Challenger.Data;
 
 /// <summary>
 ///	Database context for application PostgreSQL DBMS

@@ -1,4 +1,4 @@
-namespace Challenger.Server.Data.Models;
+namespace Challenger.Data.Models;
 
 public class User
 {
