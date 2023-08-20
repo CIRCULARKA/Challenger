@@ -2,7 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 
-using Challenger.Server.Data;
+using Challenger.Data;
 
 namespace Challenger.Server;
 

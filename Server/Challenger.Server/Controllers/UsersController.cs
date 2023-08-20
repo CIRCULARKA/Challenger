@@ -2,8 +2,8 @@ using System;
 
 using Microsoft.AspNetCore.Mvc;
 
-using Challenger.Server.Data.Models;
-using Challenger.Server.Data;
+using Challenger.Data.Models;
+using Challenger.Data;
 
 namespace Challenger.Server.Controllers;
 
