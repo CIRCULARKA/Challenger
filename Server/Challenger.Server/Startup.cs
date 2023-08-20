@@ -2,7 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 
-using Challenger.Server.Data;
+using Challenger.Data;
 
 namespace Challenger.Server;
 
@@ -18,7 +18,7 @@ public class Startup
 	public void ConfigureServices(IServiceCollection services)
 	{
 		services.AddTransient<DbContext>((provider) =>
-			new DbContext(Configuration["ConnectionString"])
+			new DbContext(Configuration.GetConnectionString("Local"))
 		);
 
 		services.AddControllers();

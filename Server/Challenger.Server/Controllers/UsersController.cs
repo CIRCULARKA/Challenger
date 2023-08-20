@@ -2,8 +2,8 @@ using System;
 
 using Microsoft.AspNetCore.Mvc;
 
-using Challenger.Server.Data.Models;
-using Challenger.Server.Data;
+using Challenger.Data.Models;
+using Challenger.Data;
 
 namespace Challenger.Server.Controllers;
 
@@ -42,5 +42,13 @@ public class UsersController : ControllerBase
 		Console.WriteLine("Request method: " + HttpContext.Request.Method);
 
 		return "Logout";
+	}
+
+	[HttpGet("user")]
+	public IActionResult GetUser([FromQuery] string login)
+	{
+		var targetUser = _dbContext.GetUser(login);
+
+		return Ok(targetUser);
 	}
 }
