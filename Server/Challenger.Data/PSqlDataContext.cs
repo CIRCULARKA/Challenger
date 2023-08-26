@@ -32,7 +32,7 @@ public class PSqlDataContext : IDataContext
 
 				using (var reader = cmd.ExecuteReader())
 				{
-					if (!reader.HasRows) throw new ArgumentException($"There is no rows in table \"Users\" where primary key is \"{pkey}\"");
+					if (!reader.HasRows) return null;
 					reader.Read();
 
 					var resultedUser = new User()

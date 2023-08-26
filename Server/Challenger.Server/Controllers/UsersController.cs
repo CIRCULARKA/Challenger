@@ -6,7 +6,8 @@ using FluentValidation;
 using FluentValidation.Results;
 
 using Challenger.Data.Models;
-using Challenger.Data;
+using Challenger.Application;
+using Challenger.Server.Errors;
 
 namespace Challenger.Server.Controllers;
 
@@ -14,11 +15,11 @@ namespace Challenger.Server.Controllers;
 [ApiController]
 public class UsersController : ControllerBase
 {
-	private readonly IDataContext _dataContext;
+	private readonly UserRegistry _userRegistry;
 
-	public UsersController(PSqlDataContext PSqlDataContext)
+	public UsersController(UserRegistry userRegistry)
 	{
-		_dataContext = PSqlDataContext;
+		_userRegistry = userRegistry;
 	}
 
 	[HttpPost("register")]
@@ -28,7 +29,8 @@ public class UsersController : ControllerBase
 		if (!validationResult.IsValid)
 			return UnprocessableEntity(new ChallengerHttpErrorMessage(validationResult));
 
-		_dataContext.AddUser(userToRegister);
+		try { _userRegistry.RegisterUser(userToRegister); }
+		catch (Exception e) { return BadRequest(new ChallengerHttpErrorMessage(ChallengerErrorTypes.ActionError, e.Message)); }
 
 		return Ok();
 	}
@@ -54,7 +56,7 @@ public class UsersController : ControllerBase
 	[HttpGet("user")]
 	public IActionResult GetUser([FromQuery] string login)
 	{
-		var targetUser = _dataContext.GetUserByPrimaryKey(login);
+		var targetUser = _userRegistry.GetUserByLogin(login);
 
 		return Ok(targetUser);
 	}
