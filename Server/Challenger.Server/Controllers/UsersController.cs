@@ -14,7 +14,7 @@ namespace Challenger.Server.Controllers;
 [ApiController]
 public class UsersController : ControllerBase
 {
-	private DbContext _dbContext;
+	private readonly DbContext _dbContext;
 
 	public UsersController(DbContext dbContext)
 	{
