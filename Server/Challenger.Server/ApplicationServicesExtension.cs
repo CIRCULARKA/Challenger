@@ -19,7 +19,7 @@ public static class ChallengerServicesExtension
 
 	public static IServiceCollection AddChallengerValidation(this IServiceCollection services)
 	{
-		services.AddTransient<IValidator<User>>();
+		services.AddTransient<IValidator<User>, UserValidator>();
 
 		return services;
 	}
