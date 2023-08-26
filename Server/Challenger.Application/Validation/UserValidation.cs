@@ -2,7 +2,7 @@ using FluentValidation;
 
 using Challenger.Data.Models;
 
-namespace Challenger.Data.Validation;
+namespace Challenger.Application.Validation;
 
 public class UserValidator : AbstractValidator<User>
 {

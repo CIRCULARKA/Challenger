@@ -6,7 +6,7 @@ using FluentValidation;
 
 using Challenger.Data;
 using Challenger.Data.Models;
-using Challenger.Data.Validation;
+using Challenger.Application.Validation;
 
 namespace Challenger.Server;
 

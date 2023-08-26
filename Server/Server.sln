@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Challenger.Server", "Challe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Challenger.Data", "Challenger.Data\Challenger.Data.csproj", "{05453F9D-0E85-43B2-BF77-821B8913FC2E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Challenger.Application", "Challenger.Application\Challenger.Application.csproj", "{93683F2F-16D2-48C7-AB57-A68CDA642B99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{05453F9D-0E85-43B2-BF77-821B8913FC2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05453F9D-0E85-43B2-BF77-821B8913FC2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05453F9D-0E85-43B2-BF77-821B8913FC2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93683F2F-16D2-48C7-AB57-A68CDA642B99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93683F2F-16D2-48C7-AB57-A68CDA642B99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93683F2F-16D2-48C7-AB57-A68CDA642B99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93683F2F-16D2-48C7-AB57-A68CDA642B99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
