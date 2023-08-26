@@ -11,16 +11,16 @@ namespace Challenger.Data;
 ///	Database context for application PostgreSQL DBMS
 ///	</summary>
 
-public class DbContext
+public class PSqlDataContext : IDataContext
 {
 	private string _connectionString;
 
-	public DbContext(string connectionString)
+	public PSqlDataContext(string connectionString)
 	{
 		_connectionString = connectionString;
 	}
 
-	public User GetUser(string login)
+	public User GetUserByPrimaryKey(string pkey)
 	{
 		var sql = @"SELECT login, name, age, weight, email, password_hash FROM users WHERE login = $1;";
 
@@ -28,11 +28,11 @@ public class DbContext
 		{
 			using (var cmd = source.CreateCommand(sql))
 			{
-				cmd.Parameters.AddWithValue(NpgsqlDbType.Varchar, login);
+				cmd.Parameters.AddWithValue(NpgsqlDbType.Varchar, pkey);
 
 				using (var reader = cmd.ExecuteReader())
 				{
-					if (!reader.HasRows) throw new ArgumentException($"There is no user with login \"{login}\"");
+					if (!reader.HasRows) throw new ArgumentException($"There is no rows in table \"Users\" where primary key is \"{pkey}\"");
 					reader.Read();
 
 					var resultedUser = new User()

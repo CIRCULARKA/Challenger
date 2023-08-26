@@ -14,21 +14,21 @@ namespace Challenger.Server.Controllers;
 [ApiController]
 public class UsersController : ControllerBase
 {
-	private readonly DbContext _dbContext;
+	private readonly IDataContext _dataContext;
 
-	public UsersController(DbContext dbContext)
+	public UsersController(PSqlDataContext PSqlDataContext)
 	{
-		_dbContext = dbContext;
+		_dataContext = PSqlDataContext;
 	}
 
 	[HttpPost("register")]
 	public IActionResult Register([FromForm] User userToRegister, [FromServices] IValidator<User> userValidator)
 	{
-		ValidationResult validationResult =  userValidator.Validate(userToRegister);
+		ValidationResult validationResult = userValidator.Validate(userToRegister);
 		if (!validationResult.IsValid)
 			return UnprocessableEntity(new ChallengerHttpErrorMessage(validationResult));
 
-		_dbContext.AddUser(userToRegister);
+		_dataContext.AddUser(userToRegister);
 
 		return Ok();
 	}
@@ -54,7 +54,7 @@ public class UsersController : ControllerBase
 	[HttpGet("user")]
 	public IActionResult GetUser([FromQuery] string login)
 	{
-		var targetUser = _dbContext.GetUser(login);
+		var targetUser = _dataContext.GetUserByPrimaryKey(login);
 
 		return Ok(targetUser);
 	}

@@ -21,8 +21,8 @@ public class Startup
 
 	public void ConfigureServices(IServiceCollection services)
 	{
-		services.AddTransient<DbContext>((provider) =>
-			new DbContext(Configuration.GetConnectionString("Local"))
+		services.AddTransient<IDataContext, PSqlDataContext>((provider) =>
+			new PSqlDataContext(Configuration.GetConnectionString("Local"))
 		);
 		services.AddTransient<IValidator<User>, UserValidator>();
 

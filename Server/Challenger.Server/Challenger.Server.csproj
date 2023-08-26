@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Challenger.Data\Challenger.Data.csproj" />
     <ProjectReference Include="..\Challenger.Application\Challenger.Application.csproj" />
+    <ProjectReference Include="..\Challenger.Data\Challenger.Data.csproj" />
   </ItemGroup>
 
 </Project>
