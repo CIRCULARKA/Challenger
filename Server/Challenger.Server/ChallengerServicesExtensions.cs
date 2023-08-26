@@ -8,7 +8,7 @@ using Challenger.Data.Models;
 
 namespace Challenger.Server;
 
-public static class ChallengerServicesExtension
+public static class ChallengerServicesExtensions
 {
 	public static IServiceCollection AddChallengerServices(this IServiceCollection services)
 	{
