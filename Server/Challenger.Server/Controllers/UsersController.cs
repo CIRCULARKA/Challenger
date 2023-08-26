@@ -2,6 +2,9 @@ using System;
 
 using Microsoft.AspNetCore.Mvc;
 
+using FluentValidation;
+using FluentValidation.Results;
+
 using Challenger.Data.Models;
 using Challenger.Data;
 
@@ -11,7 +14,7 @@ namespace Challenger.Server.Controllers;
 [ApiController]
 public class UsersController : ControllerBase
 {
-	private DbContext _dbContext;
+	private readonly DbContext _dbContext;
 
 	public UsersController(DbContext dbContext)
 	{
@@ -19,8 +22,12 @@ public class UsersController : ControllerBase
 	}
 
 	[HttpPost("register")]
-	public IActionResult Register([FromForm] User userToRegister)
+	public IActionResult Register([FromForm] User userToRegister, [FromServices] IValidator<User> userValidator)
 	{
+		ValidationResult validationResult =  userValidator.Validate(userToRegister);
+		if (!validationResult.IsValid)
+			return UnprocessableEntity(new ChallengerHttpErrorMessage(validationResult));
+
 		_dbContext.AddUser(userToRegister);
 
 		return Ok();

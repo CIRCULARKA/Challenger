@@ -2,7 +2,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 
+using FluentValidation;
+
 using Challenger.Data;
+using Challenger.Data.Models;
+using Challenger.Data.Validation;
 
 namespace Challenger.Server;
 
@@ -20,6 +24,7 @@ public class Startup
 		services.AddTransient<DbContext>((provider) =>
 			new DbContext(Configuration.GetConnectionString("Local"))
 		);
+		services.AddTransient<IValidator<User>, UserValidator>();
 
 		services.AddControllers();
 	}
