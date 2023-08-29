@@ -34,6 +34,21 @@
 				"kind": "build",
 				"isDefault": true
 			}
+		},
+		{
+			"label": "Watch Server",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"watch",
+				"--project",
+				"${workspaceFolder}/Server/Challenger.Server"
+			],
+			"problemMatcher": "$msCompile",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
 		}
 	]
 }
